@@ -1,22 +1,45 @@
+<app-loading *ngIf="busy"></app-loading>
+
 <form [formGroup]="form">
-    <h1>Nova tarefa</h1>
-    <br>
-    <textarea cols="30" rows="2" placeholder="ex: Recarregar meu telefone" formControlName="title"></textarea>
-    <small class="error" *ngIf="form.controls.title.invalid">
-        <strong>Tarefa inválida</strong>
-    </small>
-    <br>
-    <h2>Quando?</h2>
-    <input type="date" formControlName="date">
-    <small class="error" *ngIf="form.controls.date.invalid">
-        <strong>Data inválida</strong>
-    </small>
-    <br>
-    <br>
-    <p class="text-right">
-        <app-button (click)="submit()" [disabled]="form.invalid">
-            <i class="fa fa-save"></i>
-            Criar
-        </app-button>
-    </p>
+  <h2>New Trip</h2>
+  <br>
+  <input type="text" placeholder="Passenger Name" formControlName="Name" />
+  <small class="error" *ngIf="!form.controls.Name.valid && !form.controls.Name.pristine">
+    <strong>invalid name</strong>
+  </small>
+  <br>
+  <h2>When?</h2>
+
+  <input type="date" formControlName="Date" [min]="minDate">
+  <small class="error" *ngIf="!form.controls.Date.valid && !form.controls.Date.pristine">
+    <strong>invalid date</strong>
+  </small>
+
+  <input type="time" formControlName="Time">
+  <small class="error" *ngIf="!form.controls.Time.valid && !form.controls.Time.pristine">
+    <strong>invalid time</strong>
+  </small>
+
+  <br>
+
+  <h2>From?</h2>
+  <input type="text" formControlName="Origin">
+  <small class="error" *ngIf="!form.controls.Origin.valid && !form.controls.Origin.pristine">
+    <strong>invalid origin</strong>
+  </small>
+  <br>
+
+  <h2>To?</h2>
+  <input type="text" formControlName="Destination">
+  <small class="error" *ngIf="!form.controls.Destination.valid && !form.controls.Destination.pristine">
+    <strong>invalid destination</strong>
+  </small>
+  <br>
+
+  <p class="text-right">
+    <app-button (click)="submit()" [disabled]="form.invalid">
+      <i class="fa fa-save"></i>
+      Create
+    </app-button>
+  </p>
 </form>

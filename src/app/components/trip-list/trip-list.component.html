@@ -1,0 +1,34 @@
+<form [formGroup]="form">
+</form>
+
+
+<ul class="trips">
+  <li *ngFor="let trip of trips">
+    <div [ngClass]="{'editing': trip.editing}">
+
+      <div>
+        <a class="remove-item" (click)="save(trip)" *ngIf="trip.editing"><i class="fa fa-check"></i></a>
+        <a class="remove-item" (click)="cancel()" *ngIf="trip.editing"><i class="fa fa-close"></i></a>
+        <a class="remove-item" (click)="edit(trip)" *ngIf="!trip.editing && !areEdinting"><i
+            class="fa fa-pencil"></i></a>
+        <a class="remove-item" (click)="remove(trip)" *ngIf="!trip.editing"><i class="fa fa-trash"></i></a>
+      </div>
+
+      <a>
+        <input type="text" placeholder="passenger name" [(ngModel)]="trip.name"
+          [ngClass]="{'invalid': form.controls.Name.invalid && trip.editing}">
+        <input type="hidden" [(ngModel)]="trip.id">
+        <br>
+        <input type="date" placeholder="date" min="{{mindate | date:'yyyy-MM-dd'}}"
+          [ngModel]="trip.date | date:'yyyy-MM-dd'" (ngModelChange)="trip.date = $event"
+          [ngClass]="{'invalid': form.controls.Date.invalid && trip.editing}">
+        <input type="time" placeholder="hour" [(ngModel)]="trip.time"
+          [ngClass]="{'invalid': form.controls.Time.invalid && trip.editing}">
+        <input type="text" placeholder="origin" [(ngModel)]="trip.origin"
+          [ngClass]="{'invalid': form.controls.Origin.invalid && trip.editing}">
+        <input type="text" placeholder="destination" [(ngModel)]="trip.destination"
+          [ngClass]="{'invalid': form.controls.Destination.invalid && trip.editing}">
+      </a>
+    </div>
+  </li>
+</ul>

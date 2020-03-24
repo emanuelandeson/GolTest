@@ -9,9 +9,16 @@ import { ButtonComponent } from './components/button/button.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { TravelListComponent } from './components/travel-list/travel-list.component';
 import { NewComponent } from './pages/new/new.component';
-import { TravelsComponent } from './pages/travels/travels.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './interceptors/JwtInterceptor';
+import { TripsComponent } from './pages/trips/trips.component';
+import { TripListComponent } from './components/trip-list/trip-list.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -22,15 +29,22 @@ import { TravelsComponent } from './pages/travels/travels.component';
     LoginComponent,
     UserCardComponent,
     TabsComponent,
-    TravelListComponent,
+    TripListComponent,
     NewComponent,
-    TravelsComponent
+    TripsComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

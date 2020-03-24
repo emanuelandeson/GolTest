@@ -1,13 +1,27 @@
+<app-loading *ngIf="busy"></app-loading>
+
 <app-card>
+  <p class="text-center">
+    <img src="assets/icon.png" width="400" alt="Icon">
+  </p>
+  <br>
+  <form [formGroup]="form">
+    <input type="text" formControlName="Username" placeholder="Username" (keyup.enter)="enviar()">
+    <small class="error" *ngIf="!form.controls.Username.valid && !form.controls.Username.pristine">
+      <strong>Invalid username</strong>
+    </small>
+
+    <input type="password" formControlName="Password" placeholder="Password" (keyup.enter)="enviar()">
+    <small class="error" *ngIf="!form.controls.Password.valid && !form.controls.Password.pristine">
+      <strong>invalid password</strong>
+    </small>
+
     <p class="text-center">
-        <img src="assets/icon.png" width="200" alt="Icon">
+      <app-button [disabled]="form.invalid" (click)="enviar()">
+        <i class="fa fa-check-circle"></i>
+        Entrar
+      </app-button>
     </p>
-    <h1>Olá brother...</h1>
-    <br>
-    <p class="text-center">
-        <app-button>
-            <i class="fa fa-google"></i>
-            Entrar com Google
-        </app-button>
-    </p>
+  </form>
+
 </app-card>
